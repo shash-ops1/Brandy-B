@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@remotion/bundler": "^4.0.481",
+    "@remotion/renderer": "^4.0.481",
+    "axios": "^1.18.0",
+    "cloudinary": "^2.10.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.7.0",
+    "multer": "^2.2.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  }
+}
