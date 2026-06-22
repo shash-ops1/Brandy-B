@@ -15,12 +15,35 @@ const aiRoutes = require("./routes/aiRoutes");
 const videoRoutes = require("./routes/videoRoutes");
 const multer = require("multer");
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "https://branfy-five.vercel.app",
+  ...(process.env.ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+];
 
 app.use(
   cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked origin: ${origin}`));
+    },
     exposedHeaders: ["X-Render-Version"],
   })
 );
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+
+  return next();
+});
 app.use(express.json({ limit: "2mb" }));
 app.use("/api/startups", startupRoutes);
 app.use("/api/auth", authRoutes);
